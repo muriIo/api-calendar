@@ -25,7 +25,12 @@ public class Startup(IConfiguration configuration)
             return new MongoClient(settings.ConnectionString);
         });
 
-        services.AddDbContext<Context>();
+        services.AddDbContext<Context>((serviceProvider, options) =>
+        {
+            var settings = serviceProvider.GetRequiredService<IOptions<MongoDBSettings>>().Value;
+
+            options.UseMongoDB(settings.ConnectionString, settings.DatabaseName);
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
