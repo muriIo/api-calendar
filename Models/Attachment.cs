@@ -1,21 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace api_calendar.Models;
 
 public class Attachment
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Attachment_id { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string Attachment_id { get; set; } = string.Empty;
 
+    [BsonElement("Name")]
     public string Name { get; set; } = string.Empty;
 
+    [BsonElement("Url")]
     public string Url { get; set; } = string.Empty;
 
-    [ForeignKey("Event"), DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public int Event_id { get; set; }
-
-    public Event? Event { get; set; }
+    [BsonElement("Event_id")]
+    public string Event_id { get; set; } = string.Empty;
 
 }
