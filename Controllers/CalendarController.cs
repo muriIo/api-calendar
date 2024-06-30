@@ -1,11 +1,9 @@
-﻿using api_calendar.Settings;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace api_calendar;
+namespace api_calendar.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CalendarController(Context context) : ControllerBase
+public class CalendarController : ControllerBase
 {
-    private readonly Context _context = context;
 }
